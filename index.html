@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!--page title-->
+	<title>Techincal Documentation</title>
+
+	<!--page description-->
+	<meta name="description" content="freeCodeCamp Techincal Documentation challenge">
+
+	<!--character encoding-->
+	<meta charset="utf-8">
+
+	<!--device width-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--Open Graph tags-->
+	<meta property="og:title" content="Techincal Documentation">
+	<meta property="og:description" content="freeCodeCamp Techincal Documentation challenge">
+	<meta property="og:image" content="img/og-image.jpg">
+
+	<!--Twitter cards-->
+	<meta name="twitter:title" content="Techincal Documentation">
+
+	<!--stylesheets-->
+	<link rel="stylesheet" type="text/css" href="./styles.css">
+
+</head>
+
+<body>
+
+    <nav id="navbar">
+
+        <header>
+        
+            <h1>Customer Support System Dashboard</h1>
+
+        </header>
+
+        <ul>
+            <li>
+                <a class="nav-link" href="#introduction">Introduction</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#entity_relationship_diagram">Entity Relationship Diagram</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#data_dictionary">Data Dictionary</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#filling_the_database">Filling the Database</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#reports">Reports</a>
+            </li>
+        </ul>
+
+    </nav>
+
+	<main class="container" id="main-doc">
+
+		<section class="main-section" id="introduction">
+
+            <header>
+                
+                <h2>Introduction</h2>
+            
+            </header>
+
+            <p>This project uses SQL, PHP, HTML, and JavaScript to generate reports from mock customer support data.</p>
+
+            <p>The Customer Support System is a customer service platform allowing customers to communicate with customer support agents to resolve customer issues.</p>
+
+            <p>To report an issue, a customer opens a ticket, selecting a category (Account access/Bug report/Order cancellation/Overcharged transaction/Undelivered goods/Wrong order), and leaves a message explaining the issue.</p>
+
+            <p>To address the issue, a customer support agent sends a message on the ticket, which the customer may reply to.</p>
+
+            <p>The customer and the agent exchange messages until the issue is resolved and the agent marks the ticket as resolved.</p>
+
+            <p>Multiple agents may be involved in the resolution of a ticket.</p>
+
+        </section>
+
+		<section class="main-section" id="entity_relationship_diagram">
+
+            <header>
+                
+                <h2>Entity Relationship Diagram</h2>
+            
+            </header>
+
+            <figure>
+
+                <img alt="" src="img/Customer Support System ERD.jpg">
+
+                <figcaption>Customer Support System Entity Relationship Diagram</figcaption>
+
+            </figure>
+
+        </section>
+
+		<section class="main-section" id="data_dictionary">
+
+            <header>
+                
+                <h2>Data Dictionary</h2>
+            
+            </header>
+
+            <h3>1. TICKET Table</h3>
+
+            <p>A ticket is a record of an issue reported by a customer.</p>
+            
+            <h4>TICKET Table Columns</h4>
+            
+            <h5>1.1. ticket_id</h5>
+            
+            <p><h6>Description:</h6> An automatically generated unique identifier for each ticket.</p>
+            
+            <p><h6>Type:</h6> Numeric/integer.</p>
+            
+            <p><h6>Note:</h6> This is the primary key.
+            
+            <h5>1.2. customer_id</h5>
+            
+            <p><h6>Description:</h6> A foreign key linking the CUSTOMER table to identify the customer who opened the ticket.
+            
+            <h5>1.3. ticket_category</h5>
+            
+            <p><h6>Description:</h6> Describes the type of issue reported by the customer.</p>
+            
+            <p><h6>Type:</h6> Text containing alphabetic letters
+            
+            <b>Possible values:</b>Account access/Bug report/Order cancellation/Overcharged transaction/Undelivered goods/Wrong order
+            
+            <h5>1.4. ticket_rating</h5>
+            
+            <p><h6>Description:</h6> A numerical representation of the customer's satisfaction with the customer service during the resolution of the ticket.</p>
+            
+            <p><h6>Type:</h6> Numeric/integer.
+            
+            <b>Possible values:</b>1/2/3/4/5
+            
+            <h5>1.5. ticket_status</h5>
+            
+            <p><h6>Description:</h6> Whether or not the ticket has been resolved.</p>
+            
+            <p><h6>Type:</h6> Text containing alphabetic letters.
+            
+            <b>Possible values:</b>open/resolved
+            
+            <h3>2. MESSAGE Table</h3>
+            
+            A message is a communication sent by a customer or agent under a ticket.
+            
+            <h4> Table Columns</h4>
+            
+            <h5>2.1. message_id</h5>
+            
+            <p><h6>Description:</h6> An automatically generated unique identifier for each message.</p>
+            
+            <p><h6>Type:</h6> Numeric/integer.</p>
+            
+            <p><h6>Note:</h6> This is the primary key.
+            
+            <h5>2.2. sender_id</h5>
+            
+            <p><h6>Description:</h6> A foreign key linking the SENDER table to identify the sender of the message.
+            
+            <h5>2.3. message_sent_time</h5>
+            
+            <p><h6>Description:</h6> A timestamp generated when a sender (a customer/agent) sends a message.</p>
+            
+            <p><h6>Type:</h6> Date and time.
+            
+            <h5>2.4. message_text</h5>
+            
+            <p><h6>Description:</h6> The actual text contents of the message.</p>
+            
+            <p><h6>Type:</h6> Text containing alphanumeric and symbolic characters.</p>
+            
+            <h3>3. CUSTOMER Table</h3>
+            
+            A customer is a user of the Customer Support System who opens a help ticket to request assistance.
+            
+            <h4>CUSTOMER Table Columns</h4>
+            
+            <h5>3.1. customer_id</h5>
+            
+            <p><h6>Description:</h6> An automatically generated unique identifier for each customer.</p>
+            
+            <p><h6>Type:</h6> Numeric/integer
+            
+            <p><h6>Note:</h6> This is the primary key.
+            
+            <h5>3.2. sender_id</h5>
+            
+            <p><h6>Description:</h6> A foreign key linking the SENDER table to identify the customer when they send a message.
+            
+            <h5>3.3. customer_email_address</h5>
+            
+            <p><h6>Description:</h6> The customer's email address.</p>
+            
+            <p><h6>Type:</h6> Text containing alphanumeric and symbolic characters.
+            
+            <h5>3.4. customer_first_name</h5>
+            
+            <p><h6>Description:</h6> The customer's first name.</p>
+            
+            <p><h6>Type:</h6> Text containing alphabetic characters.
+            
+            <h5>3.5. customer_last_name</h5>
+            
+            <p><h6>Description:</h6> The customer's last name.</p>
+            
+            <p><h6>Type:</h6> Text containing alphabetic characters.
+            
+            <h5>3.6. customer_phone_no</h5>
+            
+            <p><h6>Description:</h6> The customer's phone number.</p>
+            
+            <p><h6>Type:</h6> Numeric/integer.</p>
+            
+            <h3>4. AGENT Table</h3>
+            
+            A agent is a customer support represantative who acts on a help ticket by replying to the customer's messages and marking the ticket as resolved once the issue has been resolved.
+            
+            <h4>AGENT Table Columns</h4>
+            
+            <h5>4.1. agent_id</h5>
+            
+            <p><h6>Description:</h6> An automatically generated unique identifier for each agent.</p>
+            
+            <p><h6>Type:</h6> Numeric/integer
+            
+            <p><h6>Note:</h6> This is the primary key.
+            
+            <h5>4.2. sender_id</h5>
+            
+            <p><h6>Description:</h6> A foreign key linking the SENDER table to identify the agent when they send a message.
+            
+            <h5>4.3. agent_email_address</h5>
+            
+            <p><h6>Description:</h6> The agent's email address.</p>
+            
+            <p><h6>Type:</h6> Text containing alphanumeric and symbolic characters.
+            
+            <h5>4.4. agent_first_name</h5>
+            
+            <p><h6>Description:</h6> The agent's first name.</p>
+            
+            <p><h6>Type:</h6> Text containing alphabetic characters.
+            
+            <h5>4.5. agent_last_name</h5>
+            
+            <p><h6>Description:</h6> The agent's last name.</p>
+            
+            <p><h6>Type:</h6> Text containing alphabetic characters.
+            
+            <h5>4.6. agent_phone_no</h5>
+            
+            <p><h6>Description:</h6> The agent's phone number.</p>
+            
+            <p><h6>Type:</h6> Numeric/integer.</p>
+            
+            <h3>5. SENDER Table</h3>
+            
+            <p>An sender is a customer or agent who sends a message.</p>
+            
+            <h4>SENDER Table Columns</h4>
+            
+            <h5>5.1. sender_id</h5>
+            
+            <p><h6>Description:</h6> An automatically generated unique identifier for each sender.</p>
+            
+            <p><h6>Type:</h6> Numeric/integer.</p>
+            
+            <p><h6>Note:</h6> This is the primary key.
+            
+            <h5>5.2. sender_type</h5>
+            
+            <p><h6>Description:</h6> Whether the sender is a customer or an agent.</p>
+            
+            <p><h6>Type:</h6> Text containing alphabetic characters.</p>
+            
+            <p><h6>Possible values:</h6> agent/customer
+
+        </section>
+
+		<section class="main-section" id="filling_the_database">
+
+            <header>
+                
+                <h2>Filling the Database</h2>
+            
+            </header>
+
+            <p>
+                I used <a href="https://www.mockaroo.com/">Mockaroo</a> to generate mock data for the database.
+                I then used <a href="https://www.thewordfinder.com/random-sentence-generator/">Random Sentence Generator</a> to generate text content for the messages between customers and agents.
+                The mock dataset contains records for:
+            </p>
+
+            <ul>
+                <li>34 agents.</li>
+                <li>123 customers.</li>
+                <li>377 tickets.</li>
+                <li>6341 messages.</li>
+                <li>157 senders.</li>
+            </ul>
+
+        </section>
+
+        <section class="main-section" id="reports">
+
+            <header>
+
+                <h2>Reports</h2>
+
+            </header>
+
+            <p>The following reports may be generated from our database.</p>
+
+            <h3>1. Ticket Resolution Time</h3>
+
+            <p>
+                With the customer support data in our database, we can track how long it takes for a ticket to be resolved.
+                We calculate the ticket resolution time by subtracting the timestamp of the first message from that of the last message on a resolved ticket.
+                We use the following SQL query to calculate the minimum, average, and maximum ticket resolution times:
+            </p>
+
+            <code>
+
+                SELECT<br>
+                <tab></tab>MIN(resolution_time) AS min_resolution_time,<br>
+                <tab></tab>AVG(resolution_time) AS avg_resolution_time,<br>
+                <tab></tab>MAX(resolution_time) AS max_resolution_time<br>
+                <tab></tab>FROM<br>
+                <tab></tab>(<br>
+                <tab></tab><tab></tab>SELECT<br>
+                <tab></tab><tab></tab><tab></tab>TIMESTAMPDIFF(SECOND, MIN(message_sent_time), MAX(message_sent_time)) / 3600 AS resolution_time<br>
+                <tab></tab><tab></tab>FROM<br>
+                <tab></tab><tab></tab><tab></tab>MESSAGE, TICKET<br>
+                <tab></tab><tab></tab>WHERE<br>
+                <tab></tab><tab></tab><tab></tab>MESSAGE.ticket_id = TICKET.ticket_id AND<br>
+                <tab></tab><tab></tab><tab></tab>ticket_status = "resolved"<br>
+                <tab></tab><tab></tab>GROUP BY MESSAGE.ticket_id<br>
+                <tab></tab>) AS RESOLUTION_TIME_TABLE;
+
+            </code>
+
+            <p>
+                The results may be displayed on a dashboard like this:
+            </p>
+
+            <figure>
+                
+                <img alt="" src="img/Ticket Resolution Time Chart.jpg">
+
+                <figcaption>Ticket Resolution Time Dashboard</figcaption>
+                
+            </figure>
+
+            <h3>2. Number of Agents Involved in a Ticket</h3>
+
+            <p>
+                Suppose that in the resolution of a ticket, more than one agent may become involved.
+                We may wish to find out how often this occurs. We do so with the following SQL query:
+            </p>
+
+            <code>
+
+                SELECT<br>
+                <tab></tab>number_of_agents,<br>
+                <tab></tab>COUNT(number_of_agents) AS number_of_tickets<br>
+                FROM<br>
+                (<br>
+                <tab></tab>SELECT<br>
+                <tab></tab><tab></tab>COUNT(DISTINCT MESSAGE.sender_id) AS number_of_agents<br>
+                <tab></tab>FROM<br>
+                <tab></tab><tab></tab>MESSAGE,<br>
+                <tab></tab><tab></tab>SENDER,<br>
+                <tab></tab><tab></tab>TICKET<br>
+                <tab></tab>WHERE<br>
+                <tab></tab><tab></tab>MESSAGE.sender_id = SENDER.sender_id AND<br>
+                <tab></tab><tab></tab>sender_type = "agent" AND<br>
+                <tab></tab><tab></tab>MESSAGE.ticket_id = TICKET.ticket_id AND<br>
+                <tab></tab><tab></tab>ticket_status = "resolved"<br>
+                <tab></tab>GROUP BY MESSAGE.ticket_id<br>
+                ) AS AGENT_COUNT_TABLE<br>
+                GROUP BY number_of_agents;
+
+            </code>
+
+            <p>
+                The results may be presented in the form of a pie chart like this:
+            </p>
+
+            <figure>
+
+                <img alt="" src="img/Agents Per Ticket Chart.jpeg">
+
+                <figcaption>Number of Agents Involved in a Ticket Chart</figcaption>
+
+            </figure>
+
+            <h3>3. Total Number of Tickets Per Agent</h3>
+
+            <p>
+                We may write the following SQL query to show us how many tickets each agent has dealt with:
+            </p>
+
+            <code>
+
+                SELECT<br>
+                <tab></tab>CONCAT(agent_first_name, " ", agent_last_name) AS agent,<br>
+                <tab></tab>COUNT(DISTINCT MESSAGE.ticket_id) AS number_of_tickets<br>
+                FROM<br>
+                <tab></tab>AGENT,<br>
+                <tab></tab>MESSAGE<br>
+                WHERE<br>
+                <tab></tab>AGENT.sender_id = MESSAGE.sender_id<br>
+                GROUP BY MESSAGE.sender_id;
+
+            </code>
+
+            <p>
+                We may display the results in a bar graph like this:
+            </p>
+
+            <figure>
+
+                <img alt="" src="img/Number of Customers Per Agent Chart.jpeg">
+
+                <figcaption>Total Number of Customers Per Agent Chart</figcaption>
+
+            </figure>
+
+            <h3>4. Ticket Resolution Time Per Month</h3>
+
+            <p>
+                If we wish to measure our perfomance over time by tracking how our ticket resolution time decreases or increases each month, we may write the following SQL query:
+            </p>
+
+            <code>
+
+                SELECT<br>
+                <tab></tab>month_name,<br>
+                <tab></tab>MIN(resolution_time) AS min_resolution_time,<br>
+                <tab></tab>AVG(resolution_time) AS avg_resolution_time,<br>
+                <tab></tab>MAX(resolution_time) AS max_resolution_time<br>
+                FROM<br>
+                <tab></tab>(<br>
+                <tab></tab><tab></tab>SELECT<br>
+                <tab></tab><tab></tab><tab></tab>TIMESTAMPDIFF(SECOND, MIN(message_sent_time), MAX(message_sent_time)) / 3600 AS resolution_time,<br>
+                <tab></tab><tab></tab><tab></tab>MONTH(MIN(message_sent_time)) AS month_number,<br>
+                <tab></tab><tab></tab><tab></tab>DATE_FORMAT(MIN(message_sent_time), "%b") AS month_name<br>
+                <tab></tab><tab></tab>FROM<br>
+                <tab></tab><tab></tab><tab></tab>MESSAGE, TICKET<br>
+                <tab></tab><tab></tab>WHERE<br>
+                <tab></tab><tab></tab><tab></tab>MESSAGE.ticket_id = TICKET.ticket_id AND<br>
+                <tab></tab><tab></tab><tab></tab>ticket_status = "resolved"<br>
+                <tab></tab><tab></tab>GROUP BY MESSAGE.ticket_id<br>
+                <tab></tab>) AS RESOLUTION_TIME_TABLE<br>
+                GROUP BY month_number;
+
+            </code>
+
+            <p>
+                Below is the resulting graph:
+            </p>
+
+            <figure>
+
+                <img alt="" src="img/Ticket Resolution Time Per Month Chart.jpeg">
+
+                <figcaption>Ticket Resolution Time Per Month</figcaption>
+
+            </figure>
+
+            <h3>5. Agent Ratings</h3>
+
+            <p>
+                A customer may rate the quality of the customer service they recieve during the resolution of a ticket.
+                The rating is a number between 1 and 5.
+                The following SQL query allows us to see the ratings recieved by each agent from customers:
+            </p>
+
+            <code>
+
+                SELECT<br>
+                <tab></tab>CONCAT(agent_first_name, " ", agent_last_name) AS agent,<br>
+                <tab></tab>MIN(ticket_rating) AS min_rating,<br>
+                <tab></tab>AVG(ticket_rating) AS avg_rating,<br>
+                <tab></tab>MAX(ticket_rating) AS max_rating<br>
+                FROM<br>
+                <tab></tab>AGENT,<br>
+                <tab></tab>MESSAGE,<br>
+                <tab></tab>TICKET<br>
+                WHERE<br>
+                <tab></tab>AGENT.sender_id = MESSAGE.sender_id AND<br>
+                <tab></tab>MESSAGE.ticket_id = TICKET.ticket_id<br>
+                GROUP BY MESSAGE.sender_id;
+
+            </code>
+
+            <p>
+                We may display the results like this:
+            </p>
+
+            <figure>
+
+                <img alt="" src="img/Agent Ratings Chart.jpeg">
+
+                <figcaption>Agent Ratings Chart</figcaption>
+
+            </figure>
+
+            <p>This project is based on the guide "[Tracking Customer Service Metrics with SQL](https://mode.com/blog/tracking-customer-service-metrics/)."</p>
+
+        </section>
+
+	</main>
+
+	<!--Footer-->
+	<footer class="container">
+
+		<div id="copyright" class="center middle">
+
+			&copy Sherpad Ndabambi <span id="footerYear">2022</span>
+
+		</div>
+		
+	</footer>
+
+</body>
+
+</html>
